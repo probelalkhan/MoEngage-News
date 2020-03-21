@@ -1,0 +1,2 @@
+rootProject.name='MoEngage News'
+include ':app'

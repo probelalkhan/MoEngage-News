@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="12dp">
+
+    <LinearLayout
+        android:id="@+id/layout_article"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/text_view_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-medium"
+            android:textColor="@color/colorTitleText"
+            android:textSize="28sp"
+            tools:text="Is this what an early-stage slowdown looks like?" />
+
+        <TextView
+            android:id="@+id/text_view_author_and_date"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:fontFamily="sans-serif-light"
+            android:textColor="@color/colorDefaultText"
+            tools:text="24th Feb 2020" />
+
+
+        <ImageView
+            android:id="@+id/image_view_thumb"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginBottom="4dp"
+            tools:background="@drawable/placeholder_thumb" />
+
+        <TextView
+            android:id="@+id/text_view_desc"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-light"
+            android:lineSpacingExtra="3dp"
+            android:textColor="@color/colorDefaultText"
+            android:textSize="16sp"
+            tools:text="Max Q is a new weekly newsletter all about space. Sign up here to receive it weekly on Sundays in your inbox. Two rocket launches were set to take off Sunday, including one from Wallops Island in Virginia and another from Cape Canaveral in Florida. The first …" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:paddingTop="12dp"
+        android:paddingBottom="12dp">
+
+        <ImageView
+            android:id="@+id/image_view_share"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginEnd="16dp"
+            android:layout_marginRight="16dp"
+            android:background="@drawable/ic_share" />
+
+        <ImageView
+            android:id="@+id/image_view_download"
+            android:layout_width="32dp"
+            android:layout_height="32dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginLeft="16dp"
+            android:background="@drawable/ic_download" />
+
+    </LinearLayout>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        android:layout_marginTop="12dp"
+        android:background="@color/colorLine" />
+
+</LinearLayout>
