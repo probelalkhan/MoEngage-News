@@ -5,22 +5,10 @@ import android.graphics.BitmapFactory;
 import android.os.AsyncTask;
 import android.widget.ImageView;
 
-import net.simplifiedcoding.moengagenews.data.models.Article;
-import net.simplifiedcoding.moengagenews.data.models.Source;
-import net.simplifiedcoding.moengagenews.data.network.ApiException;
-import net.simplifiedcoding.moengagenews.data.network.EndPoints;
-import net.simplifiedcoding.moengagenews.data.network.HTTPRequestHandler;
-
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.util.ArrayList;
-import java.util.List;
 
 public class ImageLoader extends AsyncTask<Void, Void, Bitmap> {
 

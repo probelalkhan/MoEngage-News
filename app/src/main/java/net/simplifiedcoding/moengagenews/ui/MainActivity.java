@@ -1,81 +1,57 @@
 package net.simplifiedcoding.moengagenews.ui;
 
-import android.content.Intent;
-import android.net.Uri;
 import android.os.Bundle;
-import android.view.View;
-import android.widget.ProgressBar;
+import android.view.MenuItem;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.RecyclerView;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import net.simplifiedcoding.moengagenews.R;
-import net.simplifiedcoding.moengagenews.data.models.Article;
-import net.simplifiedcoding.moengagenews.data.repository.ArticlesRepository;
+import net.simplifiedcoding.moengagenews.ui.news.NewsFragment;
+import net.simplifiedcoding.moengagenews.ui.offline.OfflineArticlesFragment;
 
-import java.util.List;
-
-public class MainActivity extends AppCompatActivity implements ArticlesRepository.ArticlesCallback, RecyclerViewItemClickListener<Article> {
-
-    private ProgressBar progressBar;
-    private ArticlesAdapter adapter;
+public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        RecyclerView recyclerView = findViewById(R.id.recycler_view_articles);
-        progressBar = findViewById(R.id.progress_bar);
+        loadFragment(new NewsFragment());
 
-        ArticlesRepository repository = new ArticlesRepository(this);
-        repository.execute();
+        BottomNavigationView navigation = findViewById(R.id.navigation);
+        navigation.setOnNavigationItemSelectedListener(this);
+    }
 
-        adapter = new ArticlesAdapter();
-        adapter.setRecyclerViewItemClickListener(this);
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setAdapter(adapter);
+    private boolean loadFragment(Fragment fragment) {
+        if (fragment != null) {
+            getSupportFragmentManager()
+                    .beginTransaction()
+                    .replace(R.id.main_container, fragment)
+                    .commit();
+            return true;
+        }
+        return false;
     }
 
 
     @Override
-    public void onArticlesFetchStarted() {
-        progressBar.setVisibility(View.VISIBLE);
-    }
+    public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+        Fragment fragment = null;
 
-    @Override
-    public void onArticlesFetchError(String message) {
-        progressBar.setVisibility(View.INVISIBLE);
-        Utils.toast(message);
-    }
-
-    @Override
-    public void onArticlesFetched(List<Article> articles) {
-        progressBar.setVisibility(View.INVISIBLE);
-        adapter.setArticles(articles);
-    }
-
-    @Override
-    public void onRecyclerViewItemClick(View view, Article item) {
-        switch (view.getId()) {
-            case R.id.image_view_download:
+        switch (item.getItemId()) {
+            case R.id.fragment_home:
+                fragment = new NewsFragment();
                 break;
-            case R.id.image_view_share:
-                shareURL(item.getUrl());
-                break;
-            case R.id.layout_article:
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(item.getUrl()));
-                startActivity(i);
+
+            case R.id.fragment_offline:
+                fragment = new OfflineArticlesFragment();
                 break;
         }
-    }
 
-    private void shareURL(String url) {
-        Intent share = new Intent(android.content.Intent.ACTION_SEND);
-        share.setType("text/plain");
-        share.addFlags(Intent.FLAG_ACTIVITY_CLEAR_WHEN_TASK_RESET);
-        share.putExtra(Intent.EXTRA_TEXT, url);
-        startActivity(Intent.createChooser(share, "Share Article..."));
+        return loadFragment(fragment);
     }
 }

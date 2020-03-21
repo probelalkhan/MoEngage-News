@@ -1,6 +1,10 @@
 package net.simplifiedcoding.moengagenews.data.network;
 
+import android.util.Log;
+
 import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
@@ -10,14 +14,12 @@ import javax.net.ssl.HttpsURLConnection;
 
 public final class HTTPRequestHandler {
 
-    private static final String BASE_URL = "https://candidate-test-data-moengage.s3.amazonaws.com/Android/news-api-feed/";
-
-    public static String get(String endPoint) throws ApiException {
+    public static String get(String requestURL) throws ApiException {
         URL url;
         StringBuilder sb;
         try {
-            url = new URL(BASE_URL + endPoint);
-            HttpURLConnection conn = (HttpURLConnection) url.openConnection();
+            url = new URL(requestURL);
+            HttpsURLConnection conn = (HttpsURLConnection) url.openConnection();
             conn.setReadTimeout(15000);
             conn.setConnectTimeout(15000);
             conn.setRequestMethod("GET");
@@ -37,4 +39,5 @@ public final class HTTPRequestHandler {
         }
         return sb.toString();
     }
+
 }

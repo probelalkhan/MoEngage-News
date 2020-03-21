@@ -9,15 +9,15 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Locale;
 
-class Utils {
+public class Utils {
 
     private static final String DATE_FORMAT = "yyyy-MM-dd'T'HH:mm:ss'Z'";
 
-    static void toast(String message) {
+    public static void toast(String message) {
         Toast.makeText(MyApplication.getContext(), message, Toast.LENGTH_SHORT).show();
     }
 
-    static String getFormattedDate(String dateString) {
+    public static String getFormattedDate(String dateString) {
         SimpleDateFormat sdf = new SimpleDateFormat(DATE_FORMAT, Locale.ENGLISH);
         try {
             Date date = sdf.parse(dateString);

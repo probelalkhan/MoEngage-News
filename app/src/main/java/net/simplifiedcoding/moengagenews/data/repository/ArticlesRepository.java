@@ -4,7 +4,6 @@ import android.os.AsyncTask;
 
 import net.simplifiedcoding.moengagenews.data.models.Article;
 import net.simplifiedcoding.moengagenews.data.models.Source;
-import net.simplifiedcoding.moengagenews.data.network.ApiException;
 import net.simplifiedcoding.moengagenews.data.network.EndPoints;
 import net.simplifiedcoding.moengagenews.data.network.HTTPRequestHandler;
 
@@ -12,6 +11,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.util.ArrayList;
 import java.util.List;
@@ -35,6 +35,8 @@ public class ArticlesRepository extends AsyncTask<Void, Void, String> {
     @Override
     protected void onPostExecute(String s) {
         final ArticlesCallback listener = this.listener.get();
+        if (listener == null) return;
+
         if (s == null) {
             listener.onArticlesFetchError("Something went wrong, try later");
             return;
@@ -61,9 +63,7 @@ public class ArticlesRepository extends AsyncTask<Void, Void, String> {
                     );
                     articles.add(article);
                 }
-                if (listener != null) {
-                    listener.onArticlesFetched(articles);
-                }
+                listener.onArticlesFetched(articles);
             }
         } catch (JSONException e) {
             listener.onArticlesFetchError(e.getMessage());
@@ -74,7 +74,7 @@ public class ArticlesRepository extends AsyncTask<Void, Void, String> {
     protected String doInBackground(Void... voids) {
         try {
             return HTTPRequestHandler.get(EndPoints.ARTICLES);
-        } catch (ApiException e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
         return null;

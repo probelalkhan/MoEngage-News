@@ -1,4 +1,4 @@
-package net.simplifiedcoding.moengagenews.ui;
+package net.simplifiedcoding.moengagenews.ui.news;
 
 import android.annotation.SuppressLint;
 import android.view.LayoutInflater;
@@ -14,6 +14,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import net.simplifiedcoding.moengagenews.R;
 import net.simplifiedcoding.moengagenews.data.models.Article;
 import net.simplifiedcoding.moengagenews.data.utils.ImageLoader;
+import net.simplifiedcoding.moengagenews.ui.RecyclerViewItemClickListener;
+import net.simplifiedcoding.moengagenews.ui.Utils;
+
 
 import java.util.List;
 

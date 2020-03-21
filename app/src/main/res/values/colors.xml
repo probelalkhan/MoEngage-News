@@ -7,4 +7,6 @@
     <color name="colorTitleText">#252525</color>
     <color name="colorDefaultText">#484848</color>
     <color name="colorLine">#919191</color>
+    <color name="colorNavIcon">#dae9f6</color>
+    <color name="colorNavText">#01294b</color>
 </resources>
